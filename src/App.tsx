@@ -10,6 +10,7 @@ import {
   Calculator,
   Home as HomeIcon,
   User,
+  BarChart2,
   ChevronRight,
   ChevronLeft,
   CheckCircle2,
@@ -39,14 +40,14 @@ const LITERACY_LESSONS: Lesson[] = [
     title: "1. Creating images",
     description: "Nuzo & Namia travel to ESWATINI where they meet Bubelang, make new friends, create images and learn all about believing in themselves.",
     duration: "15-18 minutes",
-    image: "https://picsum.photos/seed/ubongo-eswatini/400/225"
+    image: "/thumbnails/NN101.jpg"
   },
   {
     id: 2,
     title: "2. Skimming",
     description: "Nuzo & Namia travel to RWANDA where they meet with Bubelang, make new friends, skim and learn all about diversity.",
     duration: "15-18 minutes",
-    image: "https://picsum.photos/seed/ubongo-balloon/400/225",
+    image: "/thumbnails/NN102.jpg",
     url: "https://aistudio.google.com/apps/drive/1ERMixFCMSeGoj2rJNZPyCLBXPWWwDFXn?showAssistant=true&showPreview=true&resourceKey=&fullscreenApplet=true"
   },
   {
@@ -54,7 +55,70 @@ const LITERACY_LESSONS: Lesson[] = [
     title: "3. Questioning",
     description: "Nuzo & Namia travel to KENYA where they make new friends and learn all about questioning and being responsible.",
     duration: "15-18 minutes",
-    image: "https://picsum.photos/seed/ubongo-market/400/225"
+    image: "/thumbnails/NN103.jpg"
+  },
+  {
+    id: 4,
+    title: "4. Making connections",
+    description: "Nuzo & Namia travel to GHANA where they meet new friends, make connections and learn all about kindness and community.",
+    duration: "15-18 minutes",
+    image: "/thumbnails/NN104.jpg"
+  },
+  {
+    id: 5,
+    title: "5. Predicting",
+    description: "Nuzo & Namia travel to TANZANIA where they make predictions, meet new friends and learn all about courage and curiosity.",
+    duration: "15-18 minutes",
+    image: "/thumbnails/NN105.jpg"
+  },
+  {
+    id: 6,
+    title: "6. Summarising",
+    description: "Nuzo & Namia travel to NIGERIA where they practise summarising, make new friends and learn all about teamwork.",
+    duration: "15-18 minutes",
+    image: "/thumbnails/NN106.jpg"
+  },
+  {
+    id: 7,
+    title: "7. Inferring",
+    description: "Nuzo & Namia travel to UGANDA where they practise inferring meaning, meet new friends and learn all about perseverance.",
+    duration: "15-18 minutes",
+    image: "/thumbnails/NN107.jpg"
+  },
+  {
+    id: 8,
+    title: "8. Identifying main idea",
+    description: "Nuzo & Namia travel to ETHIOPIA where they identify main ideas, make new friends and learn all about creativity.",
+    duration: "15-18 minutes",
+    image: "/thumbnails/NN108.jpg"
+  },
+  {
+    id: 9,
+    title: "9. Context clues",
+    description: "Nuzo & Namia travel to SENEGAL where they use context clues, meet new friends and learn all about empathy.",
+    duration: "15-18 minutes",
+    image: "/thumbnails/NN109.jpg"
+  },
+  {
+    id: 10,
+    title: "10. Comparing & contrasting",
+    description: "Nuzo & Namia travel to ZIMBABWE where they compare and contrast, make new friends and learn all about respect.",
+    duration: "15-18 minutes",
+    image: "/thumbnails/NN110.jpg"
+  },
+  {
+    id: 11,
+    title: "11. Drawing conclusions",
+    description: "Nuzo & Namia travel to MOZAMBIQUE where they draw conclusions, meet new friends and learn all about gratitude.",
+    duration: "15-18 minutes",
+    image: "/thumbnails/NN111.jpg"
+  },
+  {
+    id: 12,
+    title: "12. Monitoring comprehension",
+    description: "Nuzo & Namia travel to ZAMBIA where they monitor their comprehension, meet new friends and learn all about leadership.",
+    duration: "15-18 minutes",
+    image: "/thumbnails/NN112.jpg"
   }
 ];
 
@@ -90,7 +154,7 @@ const Header = ({ onProfileClick, onHomeClick, onBack }: { onProfileClick: () =>
         onClick={onProfileClick}
         className="w-12 h-12 rounded-2xl bg-u-pink flex items-center justify-center border-b-4 border-u-pink/50 text-white bouncy-hover shadow-lg"
       >
-        <User size={24} />
+        <BarChart2 size={24} />
       </button>
     </div>
   </header>
@@ -217,13 +281,6 @@ export default function App() {
     >
       <div className="flex items-center justify-between mb-10">
         <div>
-          <button 
-            onClick={goBack}
-            className="flex items-center gap-2 text-base font-display font-bold text-u-grey hover:text-u-blue mb-3 transition-colors bouncy-hover"
-          >
-            <ArrowLeft size={20} />
-            Back to Home
-          </button>
           <h1 className="text-5xl font-display font-bold text-u-blue">Reading with Nuzo and Namia</h1>
         </div>
         <button className="px-6 py-3 bg-white rounded-2xl border-2 border-u-blue/20 text-u-blue font-display font-bold bouncy-hover shadow-sm">
@@ -386,13 +443,6 @@ export default function App() {
     >
       <div className="flex items-center justify-between mb-10">
         <div>
-          <button 
-            onClick={goBack}
-            className="flex items-center gap-2 text-base font-display font-bold text-u-grey hover:text-u-blue mb-3 transition-colors bouncy-hover"
-          >
-            <ArrowLeft size={20} />
-            Back to Home
-          </button>
           <h1 className="text-5xl font-display font-bold text-u-blue">Learn the Alphabet with Akili:</h1>
         </div>
       </div>
