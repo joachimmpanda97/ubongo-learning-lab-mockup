@@ -122,6 +122,34 @@ const LITERACY_LESSONS: Lesson[] = [
   }
 ];
 
+// --- Dashboard Skill Data ---
+const LITERACY_SKILLS = [
+  {
+    category: "Skimming Skills",
+    skills: [
+      { id: 1, label: "Can mention 2 or more ways to skim a page", attempts: 6, accuracy: "80%", color: 'text-u-blue' },
+      { id: 2, label: "Can identify which skimming approach was used", attempts: 4, accuracy: "50%", color: 'text-u-pink' },
+      { id: 3, label: "Can use 2 or more skimming techniques", attempts: 0, accuracy: "-", color: 'text-u-grey' },
+    ]
+  },
+  {
+    category: "Questioning Skills",
+    skills: [
+      { id: 1, label: "", attempts: 2, accuracy: "50%", color: 'text-u-blue' },
+      { id: 2, label: "", attempts: 0, accuracy: "-", color: 'text-u-grey' },
+      { id: 3, label: "", attempts: 0, accuracy: "-", color: 'text-u-grey' },
+    ]
+  },
+  {
+    category: "Predicting Skills",
+    skills: [
+      { id: 1, label: "", attempts: 0, accuracy: "-", color: 'text-u-grey' },
+      { id: 2, label: "", attempts: 0, accuracy: "-", color: 'text-u-grey' },
+      { id: 3, label: "", attempts: 0, accuracy: "-", color: 'text-u-grey' },
+    ]
+  },
+];
+
 // --- Components ---
 
 const Header = ({ onProfileClick, onHomeClick, onBack }: { onProfileClick: () => void, onHomeClick: () => void, onBack?: () => void }) => (
@@ -193,6 +221,7 @@ const BackgroundShapes = () => (
 export default function App() {
   const [view, setView] = useState<View>('home');
   const [navHistory, setNavHistory] = useState<View[]>([]);
+  const [dashboardTab, setDashboardTab] = useState<'literacy' | 'numeracy'>('literacy');
 
   const navigate = (next: View) => {
     if (next === view) return;
@@ -398,39 +427,58 @@ export default function App() {
         </div>
       </div>
 
-      <div className="space-y-8">
-        <div className="flex items-center justify-between">
-          <h2 className="text-3xl font-display font-bold text-gray-800">Literacy / Reading Comprehension</h2>
-          <span className="px-6 py-2 bg-u-yellow text-u-orange text-sm font-display font-bold rounded-full border-b-4 border-u-orange/30 shadow-md">
-            Approaching expectation
-          </span>
-        </div>
+      {/* Tab navigation */}
+      <div className="flex justify-between border-b-2 border-gray-100 mb-8">
+        <button
+          onClick={() => setDashboardTab('literacy')}
+          className={`px-6 py-3 font-display font-bold text-lg transition-all border-b-4 -mb-[2px] ${dashboardTab === 'literacy' ? 'text-gray-800 border-u-blue' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
+        >
+          Literacy / Reading Comprehension
+        </button>
+        <button
+          onClick={() => setDashboardTab('numeracy')}
+          className={`px-6 py-3 font-display font-bold text-lg transition-all border-b-4 -mb-[2px] ${dashboardTab === 'numeracy' ? 'text-gray-800 border-go-green' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
+        >
+          Numeracy / Real Life Maths
+        </button>
+      </div>
 
-        <div className="bg-white rounded-[2.5rem] border-4 border-gray-50 shadow-xl overflow-hidden">
-          <div className="p-6 bg-u-light-grey border-b-4 border-gray-100 flex justify-between text-sm font-display font-bold text-u-grey uppercase tracking-widest">
-            <span>Skimming Skills</span>
-            <div className="flex gap-12">
-              <span className="w-20 text-center">Attempts</span>
-              <span className="w-20 text-center">Accuracy</span>
-            </div>
-          </div>
-          <div className="divide-y-2 divide-gray-50">
-            {[
-              { id: 1, label: "Can mention 2 or more ways to skim a page", attempts: 6, accuracy: "80%", color: 'text-u-blue' },
-              { id: 2, label: "Can identify which skimming approach was used", attempts: 4, accuracy: "50%", color: 'text-u-pink' },
-              { id: 3, label: "Can use 2 or more skimming techniques", attempts: 0, accuracy: "-", color: 'text-u-grey' },
-            ].map((skill) => (
-              <div key={skill.id} className="p-6 flex items-center justify-between hover:bg-u-light-grey transition-colors group">
-                <span className="text-lg text-gray-700 font-display font-bold group-hover:translate-x-2 transition-transform">{skill.id}. {skill.label}</span>
-                <div className="flex gap-12 text-xl font-display font-black">
-                  <span className="w-20 text-center text-gray-400">{skill.attempts}</span>
-                  <span className={`w-20 text-center ${skill.color}`}>{skill.accuracy}</span>
+      {dashboardTab === 'literacy' && (
+        <div className="space-y-6">
+          {LITERACY_SKILLS.map((section) => (
+            <div key={section.category} className="bg-white rounded-[2rem] border-4 border-gray-50 shadow-xl overflow-hidden">
+              <div className="px-6 py-4 bg-u-light-grey border-b-2 border-gray-100 flex justify-between text-sm font-display font-bold text-u-grey uppercase tracking-widest">
+                <span>{section.category}</span>
+                <div className="flex gap-12">
+                  <span className="w-20 text-center">Attempts</span>
+                  <span className="w-20 text-center">Accuracy</span>
                 </div>
               </div>
-            ))}
-          </div>
+              <div className="divide-y-2 divide-gray-50">
+                {section.skills.map((skill) => (
+                  <div key={skill.id} className="px-6 py-5 flex items-center justify-between hover:bg-u-light-grey transition-colors">
+                    <span className="text-base text-gray-700 font-display font-bold">{skill.id}. {skill.label}</span>
+                    <div className="flex gap-12 text-xl font-display font-black flex-shrink-0">
+                      <span className="w-20 text-center text-gray-400">{skill.attempts}</span>
+                      <span className={`w-20 text-center ${skill.color}`}>{skill.accuracy}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
+      )}
+
+      {dashboardTab === 'numeracy' && (
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <div className="w-20 h-20 rounded-[1.5rem] bg-go-green/10 flex items-center justify-center mb-4">
+            <Calculator size={40} className="text-go-green" />
+          </div>
+          <h3 className="text-2xl font-display font-bold text-gray-500">No numeracy data yet</h3>
+          <p className="text-gray-400 mt-2">Complete a numeracy lesson to see your progress here.</p>
+        </div>
+      )}
     </motion.div>
   );
 
