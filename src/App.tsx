@@ -22,7 +22,7 @@ import {
 } from 'lucide-react';
 
 // --- Types ---
-type View = 'home' | 'lessons' | 'dashboard' | 'alphabet';
+type View = 'home' | 'lessons' | 'dashboard' | 'alphabet' | 'activity';
 
 interface Lesson {
   id: number;
@@ -222,6 +222,7 @@ export default function App() {
   const [view, setView] = useState<View>('home');
   const [navHistory, setNavHistory] = useState<View[]>([]);
   const [dashboardTab, setDashboardTab] = useState<'literacy' | 'numeracy'>('literacy');
+  const [activitySrc, setActivitySrc] = useState<string>('');
 
   const navigate = (next: View) => {
     if (next === view) return;
@@ -323,7 +324,10 @@ export default function App() {
             key={lesson.id}
             whileHover={{ x: 10, scale: 1.01 }}
             onClick={() => {
-              if (lesson.url) {
+              if (lesson.id === 2) {
+                setActivitySrc('https://app.spooler.fm/embed/23ae3305-7f46-4db1-977d-f5d3dfaeff8a?host=ubongo&theme=light');
+                navigate('activity');
+              } else if (lesson.url) {
                 window.open(lesson.url, '_blank');
               }
             }}
@@ -531,6 +535,28 @@ export default function App() {
     </motion.div>
   );
 
+  const renderActivity = () => (
+    <motion.div
+      key="activity"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      className="max-w-5xl mx-auto p-6"
+    >
+      <h1 className="text-3xl font-display font-bold text-u-blue mb-6">2. Skimming</h1>
+      <div className="rounded-[2rem] overflow-hidden shadow-2xl border-4 border-u-blue/10">
+        <iframe
+          src={activitySrc}
+          width="100%"
+          height="600"
+          frameBorder="0"
+          sandbox="allow-scripts allow-downloads allow-forms allow-same-origin allow-modals allow-popups"
+          allow="microphone https://app.spooler.fm; geolocation https://app.spooler.fm"
+        />
+      </div>
+    </motion.div>
+  );
+
   return (
     <div className="min-h-screen bg-u-light-grey font-sans text-gray-900 relative">
       <BackgroundShapes />
@@ -546,6 +572,7 @@ export default function App() {
           {view === 'lessons' && renderLessons()}
           {view === 'dashboard' && renderDashboard()}
           {view === 'alphabet' && renderAlphabet()}
+          {view === 'activity' && renderActivity()}
         </AnimatePresence>
       </main>
 
